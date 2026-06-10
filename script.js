@@ -199,6 +199,41 @@ document.querySelectorAll(".magnetic").forEach((card) => {
   });
 });
 
+const speakingStage = document.querySelector("[data-gallery-stage]");
+const speakingMain = document.querySelector("[data-gallery-main]");
+const speakingCount = document.querySelector("[data-gallery-count]");
+const speakingTitle = document.querySelector("[data-gallery-title]");
+const speakingCopy = document.querySelector("[data-gallery-copy]");
+
+document.querySelectorAll(".speaking-thumb").forEach((button) => {
+  button.addEventListener("click", () => {
+    if (!speakingMain || button.classList.contains("active")) return;
+    document.querySelectorAll(".speaking-thumb").forEach((item) => item.classList.remove("active"));
+    button.classList.add("active");
+    speakingStage.classList.add("is-swapping");
+    window.setTimeout(() => {
+      speakingMain.src = button.dataset.image;
+      speakingMain.alt = button.getAttribute("aria-label") || "火山引擎 Agent 社区线下分享照片";
+      speakingCount.textContent = button.dataset.count;
+      speakingTitle.textContent = button.dataset.title;
+      speakingCopy.textContent = button.dataset.copy;
+      speakingStage.classList.remove("is-swapping");
+    }, 150);
+  });
+});
+
+if (speakingStage) {
+  speakingStage.addEventListener("pointermove", (event) => {
+    const rect = speakingStage.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    speakingStage.style.transform = `rotateX(${y * -3.5}deg) rotateY(${x * 4.5}deg)`;
+  });
+  speakingStage.addEventListener("pointerleave", () => {
+    speakingStage.style.transform = "";
+  });
+}
+
 resizeCanvas();
 updateScrollMeter();
 drawField();
