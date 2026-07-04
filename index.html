@@ -14,6 +14,7 @@
     <canvas id="field" aria-hidden="true"></canvas>
     <div class="cursor-light" aria-hidden="true"></div>
     <div class="scroll-meter" aria-hidden="true"><span></span></div>
+    <div class="divine-vignette" aria-hidden="true"></div>
 
     <header class="site-header">
       <a class="brand" href="#top" aria-label="韩金 Portfolio">
@@ -28,6 +29,7 @@
         <a href="#capability">Stack</a>
         <a href="#system">System</a>
         <a href="#projects">Work</a>
+        <a href="#fit">Fit</a>
         <a href="#speaking">Speaking</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -36,32 +38,30 @@
     <main id="top">
       <section class="hero scene">
         <div class="hero-media">
-          <video
-            class="hero-video-blur"
-            src="./assets/video/brand-logo-cinematic-1080p.mp4"
-            poster="./assets/video/brand-logo-cinematic-poster.jpg"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
+          <img
+            class="hero-celestial-bg"
+            src="./assets/generated/celestial-tech-hero.webp"
+            alt=""
             aria-hidden="true"
-          ></video>
-          <video
-            class="hero-video-main"
-            src="./assets/video/brand-logo-cinematic-1080p.mp4"
-            poster="./assets/video/brand-logo-cinematic-poster.jpg"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            aria-label="品牌 logo 电影感背景视频"
-          ></video>
+          />
+          <div class="hero-aurora" aria-hidden="true"></div>
+          <div class="divine-gate" aria-hidden="true">
+            <span class="gate-ring gate-ring-a"></span>
+            <span class="gate-ring gate-ring-b"></span>
+            <span class="gate-ring gate-ring-c"></span>
+            <span class="gate-core">AI</span>
+          </div>
+          <div class="shard-field" aria-hidden="true">
+            <span class="shard shard-a"></span>
+            <span class="shard shard-b"></span>
+            <span class="shard shard-c"></span>
+            <span class="shard shard-d"></span>
+            <span class="shard shard-e"></span>
+          </div>
           <div class="scanline" aria-hidden="true"></div>
         </div>
         <div class="hero-copy reveal">
-          <p class="eyebrow">Portfolio / Han Jin</p>
+          <p class="eyebrow">Empyrean AI Portfolio / Han Jin</p>
           <h1>韩金</h1>
           <div class="hero-title" aria-label="当前 title">
             <span>西南连锁宠物店合伙人CIO</span>
@@ -71,8 +71,13 @@
             <span>火山引擎 Agent 开发者社区讲师</span>
           </div>
           <p class="hero-lede">
-            我把真实业务现场拆成数据、Agent、产品和运营动作。懂宠物连锁，也能写全栈代码；能做方案，也能交付系统。
+            面向 AI FDE、AI 产品经理与 AI 增收岗位：我把真实业务现场拆成数据、Agent、产品和运营动作，像部署一套可进化的高维作战系统。
           </p>
+          <div class="hero-intent" aria-label="求职方向">
+            <span>Open to: AI FDE</span>
+            <span>AI Product Manager</span>
+            <span>AI Revenue Growth</span>
+          </div>
           <div class="role-switcher" aria-label="身份切换器">
             <button class="role-pill active" type="button" data-role="fde">AI FDE</button>
             <button class="role-pill" type="button" data-role="native">AI-native</button>
@@ -85,7 +90,8 @@
             <p class="hero-mode-copy">进入业务现场，把 AI 能力部署成可用工具、流程和增长动作。</p>
           </div>
           <div class="hero-actions">
-            <a class="button primary" href="#engine">进入能力剖面</a>
+            <a class="button primary" href="#fit">看岗位匹配</a>
+            <a class="button secondary" href="#contact">联系我</a>
             <a class="button secondary" href="https://github.com/hanjin714" target="_blank" rel="noreferrer">GitHub</a>
           </div>
           <dl class="hero-proof">
@@ -273,6 +279,38 @@
         </div>
       </section>
 
+      <section id="fit" class="fit scene">
+        <div class="section-intro reveal">
+          <p class="section-kicker">Role Fit / Beijing AI Jobs</p>
+          <h2>不是只会用 AI，而是能把 AI 变成业务结果。</h2>
+          <p>
+            对 AI FDE、AI 产品经理和企业 AI 增收岗位，我的优势来自真实经营现场、端到端交付和跨工具链编排经验。
+          </p>
+        </div>
+        <div class="fit-board reveal" aria-label="岗位匹配证据">
+          <article class="fit-card fit-card-wide">
+            <span>01 / Business Field</span>
+            <h3>连锁零售 CIO 现场经验</h3>
+            <p>理解老板、销售、运营、门店和客户生命周期，不把 AI 项目停留在 demo，而是落到复购、跟进、数据沉淀和团队执行。</p>
+          </article>
+          <article class="fit-card">
+            <span>02 / Product Delivery</span>
+            <h3>从 PRD 到上线</h3>
+            <p>能独立完成需求调研、原型、数据结构、API 集成、Web/H5/后台开发、部署和迭代。</p>
+          </article>
+          <article class="fit-card">
+            <span>03 / Agent Workflow</span>
+            <h3>主流 Agent 工具选型</h3>
+            <p>熟悉 Agent、RPA、MCP、RAG、Function Calling、飞书 CLI 与工作流编排，能按场景选择交付路径。</p>
+          </article>
+          <article class="fit-card fit-card-accent">
+            <span>04 / Revenue Signal</span>
+            <h3>关注收入、人效和流程结果</h3>
+            <p>用任务成功率、人工接管率、执行时长、转化率、复购率和 ROI 衡量 AI 项目，而不是只看模型效果。</p>
+          </article>
+        </div>
+      </section>
+
       <section id="speaking" class="speaking scene">
         <div class="section-intro reveal">
           <p class="section-kicker">Speaking / Volcano Engine Agent Community</p>
@@ -447,6 +485,7 @@
           <p>适合聊：企业AI转型、零售 AI 改造、Agent/RPA 工作流、AI SCRM、数据诊断、MVP 产品交付、企业培训。</p>
           <a class="contact-email" href="mailto:han714jin@gmail.com">han714jin@gmail.com</a>
           <div class="hero-actions">
+            <a class="button primary" href="mailto:han714jin@gmail.com">邮件联系</a>
             <a class="button primary" href="https://www.beilunjuzhen.cn" target="_blank" rel="noreferrer">官网</a>
             <a class="button secondary" href="https://github.com/hanjin714" target="_blank" rel="noreferrer">GitHub</a>
             <a class="button secondary" href="https://x.com/kimmatrix_" target="_blank" rel="noreferrer">X / Twitter</a>

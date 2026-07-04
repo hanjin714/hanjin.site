@@ -122,6 +122,14 @@ window.addEventListener("pointermove", (event) => {
   mouse = { x: event.clientX, y: event.clientY };
   cursor.style.left = `${event.clientX}px`;
   cursor.style.top = `${event.clientY}px`;
+  const nx = event.clientX / window.innerWidth - 0.5;
+  const ny = event.clientY / window.innerHeight - 0.5;
+  document.documentElement.style.setProperty("--mx", `${event.clientX}px`);
+  document.documentElement.style.setProperty("--my", `${event.clientY}px`);
+  document.documentElement.style.setProperty("--parallax-x", `${nx * 54}px`);
+  document.documentElement.style.setProperty("--parallax-y", `${ny * 42}px`);
+  document.documentElement.style.setProperty("--tilt-x", `${nx * 9}deg`);
+  document.documentElement.style.setProperty("--tilt-y", `${ny * 8}deg`);
 });
 
 window.addEventListener("scroll", updateScrollMeter, { passive: true });
