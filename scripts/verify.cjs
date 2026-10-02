@@ -16,19 +16,19 @@ assert(!/美团|天津中天|成都洵海|反扒|自动化招聘|jimfylu4fs2/.te
 assert(html.includes('自研 Harness') && html.includes('企业 AI 协同中台'));
 assert.equal((html.match(/class="chapter(?:\s|")/g)||[]).length,7);
 assert(!/id="(?:film-time|film-clock|scroll-fill)"|class="chapter-meter"/.test(html),'No progress UI');
-assert.equal((html.match(/class="film-scene"/g)||[]).length,4);
+assert.equal((html.match(/class="orbit-panel"/g)||[]).length,4);
 function element(){return {style:{},events:{},setAttribute(k,v){this[k]=v;},addEventListener(k,fn){this.events[k]=fn;},querySelectorAll(){return this.items||[];}};}
 function boot(reduced=false){
   const scenes=Array.from({length:4},()=>Object.assign(element(),{items:Array.from({length:3},element)}));
   const toggle=element(),print=element();
-  const context={URLSearchParams,location:{search:''},matchMedia:()=>({matches:reduced,addEventListener(){}}),requestAnimationFrame:()=>1,cancelAnimationFrame(){},document:{hidden:false,getElementById:id=>id==='motion-toggle'?toggle:print,querySelectorAll:s=>s==='.film-scene'?scenes:[],addEventListener(){}}};
+  const context={URLSearchParams,location:{search:''},matchMedia:()=>({matches:reduced,addEventListener(){}}),requestAnimationFrame:()=>1,cancelAnimationFrame(){},document:{hidden:false,getElementById:id=>id==='motion-toggle'?toggle:print,querySelectorAll:s=>s==='.orbit-panel'?scenes:[],addEventListener(){}}};
   context.window=context;vm.createContext(context);vm.runInContext(source,context);return {context,scenes,toggle};
 }
 const {context,scenes}=boot();
-assert.equal(context.DURATION,24);
+assert.equal(context.DURATION,48);
 const sample=t=>{context.renderFrame(t);return JSON.stringify(scenes);};
 for(const t of [0,.2,3,6,8,12,16,18,22,24,30]){const first=sample(t);sample(t+5);assert.equal(sample(t),first);}
-context.renderFrame(14);assert.equal(scenes[2].style.opacity,'1');
-context.renderFrame(24);assert.equal(scenes[3].style.opacity,'1');
-const reduced=boot(true);assert.equal(reduced.toggle.textContent,'开启动效');assert.equal(reduced.scenes[3].style.opacity,'1');
-console.log('PASS: assets, anchors, public boundaries, four narrative scenes, no progress UI, deterministic sampling and reduced motion');
+context.renderFrame(14);assert(scenes.every(s=>Number(s.style.opacity)>=.48));
+context.renderFrame(24);assert(scenes.every(s=>s['aria-hidden']==='false'));
+const reduced=boot(true);assert.equal(reduced.toggle.textContent,'开启动效');assert(reduced.scenes.every(s=>s.style.transform.includes('translate3d')));
+console.log('PASS: assets, anchors, public boundaries, four spatial project panels, no progress UI, deterministic sampling and reduced motion');
