@@ -1,0 +1,9 @@
+{
+  "name": "hanjin-cinematic-resume",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/publish-runtime.cjs",
+    "check": "tsc -p tsconfig.json --noEmit && node scripts/verify.cjs"
+  },
+  "devDependencies": { "typescript": "7.0.2" }
+}

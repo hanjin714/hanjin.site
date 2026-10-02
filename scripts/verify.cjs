@@ -17,18 +17,31 @@ assert(html.includes('自研 Harness') && html.includes('企业 AI 协同中台'
 assert.equal((html.match(/class="chapter(?:\s|")/g)||[]).length,7);
 assert(!/id="(?:film-time|film-clock|scroll-fill)"|class="chapter-meter"/.test(html),'No progress UI');
 assert.equal((html.match(/class="orbit-panel"/g)||[]).length,4);
-function element(){return {style:{},events:{},setAttribute(k,v){this[k]=v;},addEventListener(k,fn){this.events[k]=fn;},querySelectorAll(){return this.items||[];}};}
+
+assert.equal((html.match(/<a class="orbit-panel" href="#/g)||[]).length,4,'Orbit panels must be useful links');
+assert.equal((html.match(/<details>/g)||[]).length,3,'Three interview deep dives');
+assert(html.includes('copy-email') && html.includes('role="status"'),'Contact feedback');
+assert(!/保留重构前|mini-wiring|mini-bars/.test(html),'No editor-facing copy or pretend charts');
+function element(){return {style:{},events:{},classList:{add(){},toggle(){}},setAttribute(k,v){this[k]=v;},removeAttribute(k){delete this[k];},addEventListener(k,fn){this.events[k]=fn;},contains(){return false;},querySelectorAll(){return [];}};}
 function boot(reduced=false){
-  const scenes=Array.from({length:4},()=>Object.assign(element(),{items:Array.from({length:3},element)}));
-  const toggle=element(),print=element();
-  const context={URLSearchParams,location:{search:''},matchMedia:()=>({matches:reduced,addEventListener(){}}),requestAnimationFrame:()=>1,cancelAnimationFrame(){},document:{hidden:false,getElementById:id=>id==='motion-toggle'?toggle:print,querySelectorAll:s=>s==='.orbit-panel'?scenes:[],addEventListener(){}}};
-  context.window=context;vm.createContext(context);vm.runInContext(source,context);return {context,scenes,toggle};
+  const panels=Array.from({length:4},element),elements=Object.fromEntries(ids.map(id=>[id,element()]));
+  const stage=element(),queue=new Map(),observers=[];let serial=0;
+  class Observer{constructor(callback){this.callback=callback;observers.push(this);}observe(){}unobserve(){}}
+  const context={URLSearchParams,location:{search:''},innerHeight:900,navigator:{clipboard:{writeText:async()=>{}}},matchMedia:()=>({matches:reduced,addEventListener(){}}),requestAnimationFrame:fn=>{queue.set(++serial,fn);return serial;},cancelAnimationFrame:id=>queue.delete(id),IntersectionObserver:Observer,document:{hidden:false,getElementById:id=>elements[id],querySelector:()=>stage,querySelectorAll:s=>s==='.orbit-panel'?panels:[],addEventListener(){}},addEventListener(){}};
+  context.window=context;vm.createContext(context);vm.runInContext(source,context);
+  return {context,panels,elements,stage,queue,observers};
 }
-const {context,scenes}=boot();
-assert.equal(context.DURATION,48);
-const sample=t=>{context.renderFrame(t);return JSON.stringify(scenes);};
+const {context,panels}=boot();assert.equal(context.DURATION,48);
+const sample=t=>{context.renderFrame(t);return JSON.stringify(panels.map(p=>p.style));};
 for(const t of [0,.2,3,6,8,12,16,18,22,24,30]){const first=sample(t);sample(t+5);assert.equal(sample(t),first);}
-context.renderFrame(14);assert(scenes.every(s=>Number(s.style.opacity)>=.48));
-context.renderFrame(24);assert(scenes.every(s=>s['aria-hidden']==='false'));
-const reduced=boot(true);assert.equal(reduced.toggle.textContent,'开启动效');assert(reduced.scenes.every(s=>s.style.transform.includes('translate3d')));
-console.log('PASS: assets, anchors, public boundaries, four spatial project panels, no progress UI, deterministic sampling and reduced motion');
+assert.equal(sample(0),sample(48),'Orbit must return to the same composition');
+context.renderFrame(14);assert(panels.every(p=>Number(p.style.opacity)>=.7));
+const reduced=boot(true);assert.equal(reduced.elements['motion-toggle'].textContent,'开启动效');assert.equal(reduced.queue.size,0);
+const active=boot();assert.equal(active.queue.size,1);
+active.stage.events.pointerenter({pointerType:'mouse'});assert.equal(active.queue.size,0,'Pause for pointer');
+active.stage.events.pointerleave();assert.equal(active.queue.size,1);
+active.stage.events.focusin();assert.equal(active.queue.size,0,'Pause for keyboard');
+active.stage.events.focusout({relatedTarget:null});assert.equal(active.queue.size,1);
+active.observers[0].callback([{isIntersecting:false}]);assert.equal(active.queue.size,0,'Stop outside viewport');
+active.observers[0].callback([{isIntersecting:true}]);assert.equal(active.queue.size,1);
+console.log('PASS: public boundaries, links/assets, typed runtime, deterministic orbit, hover/focus/offscreen pause, reduced motion, deep dives and contact feedback');
