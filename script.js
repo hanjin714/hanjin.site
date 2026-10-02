@@ -28,8 +28,8 @@ const panels = {
 
 const roles = {
   fde: {
-    title: "Forward Deployed Engineer",
-    copy: "进入业务现场，把 AI 能力部署成可用工具、流程和增长动作。"
+    title: "业务现场 · 产品与交付",
+    copy: "进入业务现场，拆解需求、连接系统、验证结果；以 FDE 方向寻找下一段实践。"
   },
   native: {
     title: "AI-native Builder",

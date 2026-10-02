@@ -18,6 +18,47 @@
   box-sizing: border-box;
 }
 
+.experience-grid, .case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.case-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.experience-card, .case-card {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--panel);
+  min-width: 0;
+}
+
+.experience-card > span, .case-card > span {
+  color: var(--cyan);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.experience-card h3, .case-card h3 { font-size: 23px; margin: 16px 0; }
+.experience-card p, .case-card dd, .experience-note { color: var(--muted); }
+.case-card dl { margin: 0; }
+.case-card dt { color: var(--ink); font-size: 13px; margin-top: 18px; }
+.case-card dd { margin: 6px 0 0; line-height: 1.8; font-size: 15px; }
+.case-link { display: inline-block; margin-top: 24px; color: var(--cyan); text-decoration: underline; text-underline-offset: 5px; }
+.experience-note { margin-top: 22px; font-size: 13px; }
+
+@media (max-width: 760px) {
+  .experience-grid, .case-grid { grid-template-columns: 1fr; }
+  .experience-card, .case-card { padding: 23px; }
+}
+
+@media print {
+  #field, .cursor-light, .divine-vignette, .scroll-meter, .site-header { display: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .scene { min-height: auto !important; break-inside: avoid; }
+}
+
 html {
   scroll-behavior: smooth;
 }
