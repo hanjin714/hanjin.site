@@ -6,13 +6,13 @@ Native static resume with seven readable chapters; no required video download, g
 
 ## Motion extracted from the supplied code-video reference
 
-- Seeded `mulberry32` particle initialization.
-- Analytic Canvas trajectories rather than accumulated frame state.
-- Four six-second scenes, SVG path drawing, outlined display typography and restrained entry easing.
+- Four six-second editorial scenes: business constraints, Harness construction, representative delivery, and career context.
+- Analytic DOM transforms and staggered content entrance rather than accumulated frame state.
+- One playback pass holds the final scene. Decorative particle fields and orbit typography were removed after user feedback.
 - `window.DURATION = 24`, `window.renderFrame(t)` and `?t=8` for reproducible frame sampling.
 - A separate requestAnimationFrame playback driver for the live website, not inside the frame renderer.
-- Scroll chapters change the field's composition. Motion does not control scrolling or hide resume text.
-- Pause/scrub, reduced-motion default, hidden-tab suspension and lower particle count on mobile.
+- Motion does not control scrolling or hide resume text.
+- Header pause/replay, reduced-motion final-frame default and hidden-tab suspension. No player or page progress bar.
 
 This adapts the reference's construction techniques, not its unrelated 61-second WorkBuddy script, audio track or MP4 delivery specification. No audio autoplays.
 
