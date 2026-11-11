@@ -14,7 +14,11 @@ for (const m of [...html.matchAll(/(?:src|href)="(\.\/[^"?#]+)"/g), ...css.match
 }
 assert(!/美团|天津中天|成都洵海|反扒|自动化招聘|jimfylu4fs2/.test(html), 'Restricted public details');
 assert(html.includes('自研 Harness') && html.includes('企业 AI 协同中台'));
-assert.equal((html.match(/class="chapter(?:\s|")/g)||[]).length,7);
+assert.equal((html.match(/class="chapter(?:\s|")/g)||[]).length,8);
+assert.equal((html.match(/class="journey-tab"/g)||[]).length,4,'Four accessible journey stops');
+assert(html.includes('id="universe"') && html.includes('id="journey-panel"'),'Interactive journey and spatial canvas');
+assert.equal((html.match(/data-story-index="0[1-5]"/g)||[]).length,5,'Five narrative scenes');
+assert(html.includes('href="#story"') && html.includes('id="story-current"'),'Story entry and progress');
 assert(!/id="(?:film-time|film-clock|scroll-fill)"|class="chapter-meter"/.test(html),'No progress UI');
 assert.equal((html.match(/class="orbit-panel"/g)||[]).length,4);
 
